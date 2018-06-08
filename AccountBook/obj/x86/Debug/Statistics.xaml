@@ -1,0 +1,121 @@
+﻿<Page
+    xmlns:telerikChart="using:Telerik.UI.Xaml.Controls.Chart"
+    xmlns:telerikPrimitives="using:Telerik.UI.Xaml.Controls.Primitives"
+    x:Class="AccountBook.Statistics"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AccountBook"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="20,20,20,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:ConnectionId='7' x:Name="Text1" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">从</TextBlock>
+            <DatePicker x:ConnectionId='8' x:Name="DateEnd" Grid.Column="1" Margin="0,0,10,0"></DatePicker>
+            <TextBlock x:ConnectionId='9' x:Name="Text2" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,10,0">开始往前查看</TextBlock>
+            <ComboBox x:ConnectionId='10' x:Name="DateScope" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,10,0">
+                <ComboBoxItem Content="一个月" IsSelected="True"/>
+                <ComboBoxItem Content="三个月" />
+                <ComboBoxItem Content="六个月"  />
+            </ComboBox>
+            <TextBlock x:ConnectionId='11' x:Name="Text3" Grid.Column="4" VerticalAlignment="Center" Margin="0,0,10,0">内的</TextBlock>
+            <Button x:ConnectionId='12' x:Name="TypeComparison" Grid.Column="5"                              Margin="0,0,10,0">收支各类型比例</Button>
+            <Button x:ConnectionId='13' x:Name="MonthComparison" Grid.Column="6"                               Margin="0,0,10,0">各月收支对比</Button>
+        </Grid>
+        <!--收支各类型比例饼形图-->
+        <Grid x:ConnectionId='1' x:Name="TypePie" Grid.Row="1" Margin="20,20,20,0" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <RelativePanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Width="350" Margin="0,25,0,0" HorizontalAlignment="Left">
+                <RadioButton x:ConnectionId='5' x:Name="receipt" Content="收" IsChecked="True"                           />
+                <RadioButton x:ConnectionId='6' x:Name="pay" Content="支" RelativePanel.AlignRightWithPanel="True"                      />
+            </RelativePanel>
+            <telerikChart:RadPieChart x:ConnectionId='4' x:Name="PieChart" Grid.Row="1" Grid.Column="1" Margin="0,0,20,0"  Width="250"  Height="250"  PaletteName="DefaultDark" ClipToBounds="False" HorizontalAlignment="Center">
+                <telerikChart:PieSeries ShowLabels="True" >
+                    <telerikChart:PieSeries.ValueBinding >
+                        <telerikChart:PropertyNameDataPointBinding  PropertyName="Value" />
+                    </telerikChart:PieSeries.ValueBinding >
+                    <telerikChart:PieSeries.LegendTitleBinding>
+                        <telerikChart:PropertyNameDataPointBinding  PropertyName="Category" />
+                    </telerikChart:PieSeries.LegendTitleBinding>
+                </telerikChart:PieSeries >
+            </telerikChart:RadPieChart >
+            <telerikPrimitives:RadLegendControl Grid.Row="1" Grid.Column="0"  LegendProvider="{Binding ElementName=PieChart}">
+                <telerikPrimitives:RadLegendControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </telerikPrimitives:RadLegendControl.ItemsPanel>
+                <telerikPrimitives:RadLegendControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Fill="{Binding Fill}" Stroke="{Binding Stroke}"
+                         StrokeThickness="1" Width="10" Height="10"/>
+                            <TextBlock Text="{Binding Title}" Foreground="{Binding Fill}"
+                           Margin="10" FontStyle="Italic"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </telerikPrimitives:RadLegendControl.ItemTemplate>
+            </telerikPrimitives:RadLegendControl>
+        </Grid>
+        <!--各月收支对比柱状图-->
+        <Grid x:ConnectionId='2' x:Name="MonthBar" Grid.Row="1" Margin="20,20,20,0" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <telerikChart:RadCartesianChart x:ConnectionId='3' x:Name="bar" Grid.Column="0"  Margin="20,20,20,0" PaletteName="DefaultLight" Height="250">
+                <telerikChart:RadCartesianChart.VerticalAxis>
+                    <telerikChart:LinearAxis/>
+                </telerikChart:RadCartesianChart.VerticalAxis>
+                <telerikChart:RadCartesianChart.HorizontalAxis>
+                    <telerikChart:CategoricalAxis/>
+                </telerikChart:RadCartesianChart.HorizontalAxis>
+
+                <telerikChart:BarSeries CombineMode="Cluster" ItemsSource="{Binding Receive}">
+                    <telerikChart:BarSeries.ValueBinding>
+                        <telerikChart:PropertyNameDataPointBinding PropertyName="Value"/>
+                    </telerikChart:BarSeries.ValueBinding>
+                    <telerikChart:BarSeries.CategoryBinding>
+                        <telerikChart:PropertyNameDataPointBinding PropertyName="Month"/>
+                    </telerikChart:BarSeries.CategoryBinding>
+                </telerikChart:BarSeries>
+                <telerikChart:BarSeries CombineMode="Cluster" ItemsSource="{Binding Pay}">
+                    <telerikChart:BarSeries.ValueBinding>
+                        <telerikChart:PropertyNameDataPointBinding PropertyName="Value"/>
+                    </telerikChart:BarSeries.ValueBinding>
+                    <telerikChart:BarSeries.CategoryBinding>
+                        <telerikChart:PropertyNameDataPointBinding PropertyName="Month"/>
+                    </telerikChart:BarSeries.CategoryBinding>
+                </telerikChart:BarSeries>
+            </telerikChart:RadCartesianChart>
+            <telerikPrimitives:RadLegendControl Grid.Column="1">
+                <telerikPrimitives:RadLegendControl.LegendItems>
+                    <telerikPrimitives:LegendItem Fill="#1E98E4" Stroke="#1E98E4" Title="收入"/>
+                    <telerikPrimitives:LegendItem Fill="#FFC500" Stroke="#FFC500" Title="支出"/>
+                </telerikPrimitives:RadLegendControl.LegendItems>
+            </telerikPrimitives:RadLegendControl>
+        </Grid>
+    </Grid>
+</Page>
+

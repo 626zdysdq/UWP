@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="AccountBook.EditBook"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AccountBook"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions></Grid.ColumnDefinitions>
+        <TextBlock Margin="20,20,20,0" Grid.Row="0" Text="账本信息" FontSize="40"/>
+        <Grid Grid.Row="1"  Margin="20,20,20,0">
+            <StackPanel HorizontalAlignment="Left" Width="Auto">
+                <TextBlock Text="账本名称" Margin="0,20,0,0"></TextBlock>
+                <TextBox x:Name="name" Width="200" Margin="0,20,0,0"/>
+                <TextBlock Text="每月预算" Margin="0,20,0,0"></TextBlock>
+                <RelativePanel Grid.ColumnSpan="2" Width="200" Margin="0,25,0,0" HorizontalAlignment="Left">
+                    <RadioButton x:Name="limitless" Content="无上限" IsChecked="True" Checked="limitless_Checked"/>
+                    <RadioButton x:Name="limitted" Content="有上限" RelativePanel.AlignRightWithPanel="True" Checked="limitted_Checked"/>
+                </RelativePanel>
+                <TextBox x:Name="budget" Width="200" Margin="0,20,0,0" Visibility="Collapsed"/>
+                <RelativePanel Margin="0,25,0,0">
+                    <Button x:Name="cancelButton" Content="取消" Click="cancelButton_Click" />
+                    <Button x:Name="createButton" Content="创建" RelativePanel.AlignRightWithPanel="True" Click="Button_Click" />
+                </RelativePanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

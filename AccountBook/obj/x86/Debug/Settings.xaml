@@ -1,0 +1,21 @@
+﻿<Page
+    x:Class="AccountBook.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AccountBook"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="20,0,20,0">
+            <TextBlock FontSize="30" Margin="0,20,0,0">BGM设置</TextBlock>
+            <TextBlock x:ConnectionId='1' x:Name="bgmName" FontSize="20" Margin="20,20,0,0"></TextBlock>
+            <Button x:ConnectionId='2' x:Name="resetMedia" Margin="20,20,0,0" VerticalAlignment="Top"                         >恢复默认BGM</Button>
+            <Button x:ConnectionId='3' x:Name="openMedia" Margin="20,20,0,0" VerticalAlignment="Top"                        >选择新的BGM</Button>
+            <TextBlock FontSize="30" Margin="0,20,0,0">音量设置</TextBlock>
+            <Slider x:ConnectionId='4' x:Name="volumnSlider" Margin="20,20,0,0" Width="100" HorizontalAlignment="Left" Value="50"                                          ></Slider>
+        </StackPanel>
+    </Grid>
+</Page>
+

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Source>C:\Users\yumli\Downloads\optionHeader.jpg</Source>
+    <SmallTileSource>C:\Users\yumli\Downloads\optionHeader.jpg</SmallTileSource>
+    <MediumTileSource>C:\Users\yumli\Downloads\optionHeader.jpg</MediumTileSource>
+    <WideTileSource>C:\Users\yumli\Downloads\optionHeader.jpg</WideTileSource>
+    <LargeTileSource>C:\Users\yumli\Downloads\optionHeader.jpg</LargeTileSource>
+    <AppIconSource>C:\Users\yumli\Downloads\optionHeader.jpg</AppIconSource>
+    <SplashScreenSource>C:\Users\yumli\Downloads\optionHeader.jpg</SplashScreenSource>
+    <PackageLogoSource>C:\Users\yumli\Downloads\optionHeader.jpg</PackageLogoSource>
+  </PropertyGroup>
+</Project>
